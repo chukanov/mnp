@@ -1,0 +1,80 @@
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="mnp-core" basedir="." default="build">
+
+	<property file="build.properties"/>
+
+	<property name="build-dir" location="${basedir}/.build"/>
+	<property name="distr-dir" location="${build-dir}/distr"/>
+	<property name="home-dir" location="${HOME}"/>
+        
+	<property name="lib-dir" location="${basedir}/lib"/>
+	<property name="src-dir" location="${basedir}/src"/>
+	<property name="doc-dir" location="${basedir}/doc"/>
+
+	<condition property="resolver" value="eyeline" else="snapshot">
+		<isset property="JENKINS_VERSION"/>
+	</condition>
+
+	<tstamp>
+		<format property="build-date" pattern="yyyy-MM-dd HH:mm:ss" />
+	</tstamp>
+
+
+	<target name="clean" description="clean all">
+	    <delete dir="${build-dir}"/>
+	</target>
+
+
+	<target name="resolve" description="retrieve dependencies with ivy">
+		<ivy:settings file="${user.home}/.ivy2/ivysettings.xml"/>
+		<ivy:resolve transitive="false"/>
+		<mkdir dir="${build-dir}/lib"/>
+		<ivy:retrieve pattern="${build-dir}/lib/[artifact]-[revision].[ext]" type="jar,bundle"/>
+		<mkdir dir="${build-dir}/report"/>
+		<ivy:report todir="${build-dir}/report" graph="true"/>
+	</target>
+
+	<path id="classpath">
+		<fileset dir="${build-dir}/lib">
+			<include name="**/*.jar"/>
+		</fileset>
+		<pathelement path="${hard-dependencies}"/>
+	</path>
+
+	<target name="build" depends="clean, resolve">
+		<mkdir dir="${build-dir}/out"/>
+		<javac destdir="${build-dir}/out"
+			   optimize="off"
+			   debug="off"
+			   encoding="UTF-8"
+			   nowarn="on"
+			   includeantruntime="false">
+			<compilerarg value="-Xlint:all"/>
+			<compilerarg value="-Xlint:unchecked" />
+			<compilerarg value="-Xlint:fallthrough" />
+			<compilerarg value="-Xlint:deprecation" />
+			<src path="src"/>
+			<classpath refid="classpath"/>
+		</javac>
+	</target>
+
+	<target name="jar" depends="build">
+		<mkdir dir="${distr-dir}"/>
+		<jar destfile="${distr-dir}/${module-name}.jar">
+			<manifest>
+				<attribute name="Module" value="${module-name}"/>
+				<attribute name="Vendor" value="Eyeline Communications"/>
+				<attribute name="Release-Version" value="${release-version}"/>
+				<attribute name="Build-Date" value="${build-date}"/>
+			</manifest>
+			<fileset dir="${build-dir}/out" includes="**/*"/>
+		</jar>
+	</target>
+
+	<target name="distr" depends="jar">
+		<ivy:publish resolver="${resolver}" pubrevision="${release-version}" overwrite="true">
+			<artifacts pattern=".build/distr/[artifact].[ext]"/>
+		</ivy:publish>
+	</target>
+
+</project>
+

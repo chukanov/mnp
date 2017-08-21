@@ -1,0 +1,21 @@
+<ivy-module version="2.0">
+  <info organisation="com.eyeline.mnp" module="mnp-server"/>
+  <dependencies>
+    <dependency org="org.glassfish.jersey.core" name="jersey-server" rev="2.7"/>
+    <dependency org="org.glassfish.jersey.containers" name="jersey-container-servlet-core" rev="2.7"/>
+    <dependency org="org.glassfish.jersey.containers" name="jersey-container-jetty-http" rev="2.7"/>
+    <dependency org="org.glassfish.jersey.media" name="jersey-media-moxy" rev="2.7"/>
+
+    <!-- dependency org="com.fasterxml.jackson.core" name="jackson-core" rev="2.7.2"/>
+    <dependency org="com.fasterxml.jackson.core" name="jackson-annotations" rev="2.7.2"/>
+    <dependency org="com.fasterxml.jackson.core" name="jackson-databind" rev="2.7.2"/>
+    <dependency org="com.fasterxml.jackson.jaxrs" name="jackson-jaxrs-json-provider" rev="2.7.2"/>
+    <dependency org="com.fasterxml.jackson.jaxrs" name="jackson-jaxrs-base" rev="2.7.2"/>
+    <dependency org="com.fasterxml.jackson.module" name="jackson-module-jaxb-annotations" rev="2.7.2"/>
+    <dependency org="org.glassfish.jersey.media" name="jersey-media-json-jackson" rev="2.22.2"/ -->
+
+    <dependency org="org.eclipse.jetty.aggregate" name="jetty-all" rev="9.3.0.M1"/>
+    <dependency org="log4j" name="log4j" rev="1.2.17"/>
+    <dependency org="junit" name="junit" rev="4.12"/>
+  </dependencies>
+</ivy-module>

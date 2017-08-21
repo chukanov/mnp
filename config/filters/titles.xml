@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>Таблица соответствия названий операторов из реестра Россвязи и ФГУП ЦНИИС к общеупотребимым beeline, megafon, mts, tele2 и пр.</comment>
+    <entry key=".*вымпел-коммуникации.*">beeline</entry>
+    <entry key=".*Вымпел-Коммуникации.*">beeline</entry>
+    <entry key=".*ВымпелКом.*">beeline</entry>
+
+    <entry key=".*Мобильные ТелеСистемы.*">mts</entry>
+    <entry key=".*СИБИНТЕРТЕЛЕКОМ.*">mts</entry>
+
+    <entry key=".*МГТС.*">mgts</entry>
+
+
+    <entry key=".*МегаФон.*">megafon</entry>
+
+    <entry key=".*Скартел.*">yota</entry>
+
+    <entry key=".*Ростовская Сотовая Связь.*">tele2</entry>
+    <entry key=".*Кемеровская Мобильная Связь.*">tele2</entry>
+    <entry key=".*Челябинская Сотовая Связь.*">tele2</entry>
+    <entry key=".*Белгородская Сотовая Связь.*">tele2</entry>
+    <entry key=".*Вотек Мобайл.*">tele2</entry>
+    <entry key=".*Персональные Системы Связи в Регионе.*">tele2</entry>
+    <entry key=".*Смоленская Сотовая Связь.*">tele2</entry>
+    <entry key=".*Архангельские Мобильные Сети.*">tele2</entry>
+    <entry key=".*Мурманская Мобильная Сеть.*">tele2</entry>
+    <entry key=".*Телеком Евразия.*">tele2</entry>
+    <entry key=".*Сотовая Связь Удмуртии.*">tele2</entry>
+    <entry key=".*Скай Линк.*">tele2</entry>
+    <entry key=".*Московская сотовая связь.*">tele2</entry>
+    <entry key=".*Дельта Телеком.*">tele2</entry>
+    <entry key=".*Саратовская система сотовой связи.*">tele2</entry>
+    <entry key=".*Уралвестком.*">tele2</entry>
+    <entry key=".*Скай-1800.*">tele2</entry>
+    <entry key=".*Астарта.*">tele2</entry>
+    <entry key=".*Нижегородская сотовая связь.*">tele2</entry>
+    <entry key=".*Енисейтелеком.*">tele2</entry>
+    <entry key=".*Байкалвестком.*">tele2</entry>
+    <entry key=".*РТ-Мобайл.*">tele2</entry>
+    <entry key=".*Беспроводные информационные технологии.*">tele2</entry>
+    <entry key=".*АКОС.*">tele2</entry>
+    <entry key=".*АПЕКС.*">tele2</entry>
+    <entry key=".*Т2 Мобайл.*">tele2</entry>
+    <entry key=".*Волгоград-GSM.*">tele2</entry>
+    <entry key=".*Курская Сотовая Связь.*">tele2</entry>
+    <entry key=".*Липецк Мобайл.*">tele2</entry>
+    <entry key=".*Мурманская Мобильная Сеть.*">tele2</entry>
+    <entry key=".*Новгородские телекоммуникации.*">tele2</entry>
+    <entry key=".*Парма Мобайл.*">tele2</entry>
+    <entry key=".*Санкт-Петербург Телеком.*">tele2</entry>
+    <entry key=".*Сибирская Сотовая Связь.*">tele2</entry>
+    <entry key=".*Телесет Лтд.*">tele2</entry>
+    <entry key=".*ЕТК.*">tele2</entry>
+    <entry key=".*БВК.*">tele2</entry>
+    <entry key=".*НСС.*">tele2</entry>
+    <entry key=".*Ростелеком.*">tele2</entry>
+    <entry key=".*Теле2.*">tele2</entry>
+    <entry key=".*Кузбаск\.сот\. связь.*">tele2</entry>
+    <entry key=".*СМАРТС-Йошкар-Ола.*">tele2</entry>
+    <entry key=".*СМАРТС-Астрахань.*">tele2</entry>
+    <entry key=".*Т2 Мобайл.*">tele2</entry>
+
+    <entry key=".*Глобал Телеком.*">gtel</entry>
+
+</properties>

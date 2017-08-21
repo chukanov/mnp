@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>Таблица соответствия названий регионов из реестра Россвязи к названиям на латинице.</comment>
+    <entry key=".*Моск.*">moscow</entry>
+    <entry key=".*Новосибирск.*">novosibirsk</entry>
+    <entry key=".*Самарская.*">samara</entry>
+    <entry key=".*Челябинская.*">chelyabinsk</entry>
+    <entry key=".*Тыва.*">tiva</entry>
+    <entry key=".*Краснодар.*">krasnodar</entry>
+</properties>
