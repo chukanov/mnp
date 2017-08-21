@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Storage storage = Builder.
                 builder().
-                add(new RossvyazMasksParser(Paths.get("config/rossvyaz/ru.backup.2017-08-09-11-45.csv"))).
+                add(new RossvyazMasksParser(Paths.get("config/rossvyaz/Kody_DEF-9kh.csv"))).
                 add(new CustomMasksParser(Paths.get("config/mnos.xml"))).
                 add(new ZniisMnpParser(Paths.get("config/zniils/"))).
                 idTitle( Paths.get("config/idfilters/titles.xml")).
