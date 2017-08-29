@@ -8,4 +8,6 @@
     <entry key=".*Челябинская.*">chelyabinsk</entry>
     <entry key=".*Тыва.*">tiva</entry>
     <entry key=".*Краснодар.*">krasnodar</entry>
+    <entry key=".*Петербург.*">s_peter</entry>
+
 </properties>
