@@ -7,6 +7,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -19,22 +20,17 @@ public class RestServer {
     }
 
     public static void main(String[] args) throws Exception {
-        int port = 8080;
-        if (args.length>0) {
-            try {
-                port = Integer.parseInt(args[0]);
-            } catch (Exception e){
-                System.err.println("first parameter should be integer (server port)");
-            }
-        }
-        System.out.println("Configuring MNP storage...");
+        int port = getPort(args);
+        Path configDir = getConfigDir(args);
+        System.out.println("Configuring MNP storage from config directory: "+configDir);
+
         Builder builder = Builder.builder();
         storage = builder.
-                add(new RossvyazMasksParser(Paths.get("./config/rossvyaz/Kody_DEF-9kh.csv"))).
-                add(new CustomMasksParser(Paths.get("./config/mnos.xml"))).
-                add(new ZniisMnpParser(Paths.get("./config/zniis/"))).
-                idTitle(Paths.get("./config/filters/titles.xml")).
-                idRegion(Paths.get("./config/filters/areas.xml")).
+                add(new RossvyazMasksParser(configDir.resolve("rossvyaz/Kody_DEF-9kh.csv"))).
+                add(new CustomMasksParser(configDir.resolve("mnos.xml"))).
+                //add(new ZniisMnpParser(configDir.resolve("zniis/"))).
+                idTitle(configDir.resolve("titles.xml")).
+                idRegion(configDir.resolve("areas.xml")).
                 build();
         System.out.println("Starting server on port: "+port);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
@@ -50,10 +46,29 @@ public class RestServer {
                 MnpApi.class.getCanonicalName());
         try {
             jettyServer.start();
-            System.out.println("Server started. Example request: http://localhost:8080/mnp?subscriber=79139367911");
+            System.out.println("Server started. Example request: http://localhost:"+port+"/mnp?subscriber=79139367911");
             jettyServer.join();
         } finally {
             jettyServer.destroy();
         }
+    }
+
+    private static int getPort(String[] args) {
+        int port = 8080;
+        if (args.length>0) {
+            try {
+                port = Integer.parseInt(args[0]);
+            } catch (Exception e){
+                System.err.println("first parameter should be integer (server port)");
+            }
+        }
+        return port;
+    }
+
+    private static Path getConfigDir(String[] args) {
+        if (args.length>1 && args[1]!=null) {
+            return Paths.get(args[1]);
+        }
+        return Paths.get("./config");
     }
 }
