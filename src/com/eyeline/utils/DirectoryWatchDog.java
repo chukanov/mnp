@@ -26,6 +26,7 @@ public abstract class DirectoryWatchDog {
     private boolean shutup = false;
     private Future scheduledFuture;
 
+    @SuppressWarnings("unchecked")
     public synchronized void start() throws IOException {
         this.shutup = false;
         watchService = FileSystems.getDefault().newWatchService();

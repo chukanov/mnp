@@ -1,7 +1,8 @@
 <ivy-module version="2.0">
   <info organisation="com.eyeline.mnp" module="mnp-core"/>
   <dependencies>
-    <dependency org="log4j" name="log4j" rev="1.2.17"/>
-    <dependency org="junit" name="junit" rev="4.12"/>
+    <dependency org="log4j" name="log4j" rev="1.2.17" transitive="false"/>
+    <dependency org="junit" name="junit" rev="4.12" transitive="true"/>
+    <!--dependency org="org.hamcrest" name="hamcrest-all" rev="1.3"/ -->
   </dependencies>
 </ivy-module>

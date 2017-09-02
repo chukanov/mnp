@@ -1,5 +1,5 @@
 <ivy-module version="2.0">
-  <info organisation="com.eyeline.mnp" module="mnp-server"/>
+  <info organisation="com.eyeline.mnp" module="mnp-restapi"/>
   <dependencies>
     <dependency org="org.glassfish.jersey.core" name="jersey-server" rev="2.7"/>
     <dependency org="org.glassfish.jersey.containers" name="jersey-container-servlet-core" rev="2.7"/>
@@ -16,6 +16,5 @@
 
     <dependency org="org.eclipse.jetty.aggregate" name="jetty-all" rev="9.3.0.M1"/>
     <dependency org="log4j" name="log4j" rev="1.2.17"/>
-    <dependency org="junit" name="junit" rev="4.12"/>
   </dependencies>
 </ivy-module>

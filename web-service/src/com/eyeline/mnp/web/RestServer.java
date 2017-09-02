@@ -29,8 +29,8 @@ public class RestServer {
                 add(new RossvyazMasksParser(configDir.resolve("rossvyaz/Kody_DEF-9kh.csv"))).
                 add(new CustomMasksParser(configDir.resolve("mnos.xml"))).
                 //add(new ZniisMnpParser(configDir.resolve("zniis/"))).
-                idTitle(configDir.resolve("titles.xml")).
-                idRegion(configDir.resolve("areas.xml")).
+                idTitle(configDir.resolve("filters/titles.xml")).
+                idRegion(configDir.resolve("filters/areas.xml")).
                 build();
         System.out.println("Starting server on port: "+port);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);

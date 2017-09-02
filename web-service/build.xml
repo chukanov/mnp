@@ -1,4 +1,4 @@
-<project xmlns:ivy="antlib:org.apache.ivy.ant" name="mnp" basedir="." default="distr">
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="mnp-restapi" basedir="." default="distr">
 
 	<property file="build.properties"/>
 
@@ -6,33 +6,38 @@
 	<property name="distr-dir" location="${basedir}/distr"/>
 	<property name="home-dir" location="${HOME}"/>
         
-	<property name="lib-dir" location="${basedir}/lib"/>
 	<property name="src-dir" location="${basedir}/src"/>
 	<property name="doc-dir" location="${basedir}/doc"/>
 	<property name="test-src" location="${basedir}/test"/>
 	<property name="report-dir" location="${build-dir}/report"/>
+        <property name="root.distr-dir" location="${basedir}/../distr"/>
+	<property name="bin-dir" location="${basedir}/bin"/>
+        <property name="root.config-dir" location="${basedir}/../config"/>
 
 	<tstamp>
 		<format property="build-date" pattern="yyyy-MM-dd HH:mm:ss" />
 	</tstamp>
 
 	<target name="clean" description="clean all">
-	    <delete dir="${distr-dir}"/>
 	    <delete dir="${build-dir}"/>
+	    <delete dir="${distr-dir}"/>
 	</target>
 
 
 	<target name="resolve" description="retrieve dependencies with ivy">
 		<ivy:settings file="${user.home}/.ivy2/ivysettings.xml"/>
 		<!--ivy:resolve transitive="false"/-->
-		<mkdir dir="${build-dir}/lib"/>
-		<ivy:retrieve pattern="${build-dir}/lib/[artifact]-[revision].[ext]" type="jar,bundle"/>
+		<mkdir dir="${distr-dir}/lib"/>
+		<ivy:retrieve pattern="${distr-dir}/lib/[artifact]-[revision].[ext]" type="jar,bundle"/>
 		<mkdir dir="${build-dir}/report"/>
 		<ivy:report todir="${build-dir}/report" graph="true"/>
 	</target>
 
 	<path id="classpath">
-		<fileset dir="${build-dir}/lib">
+		<fileset dir="${root.distr-dir}">
+			<include name="**/*.jar"/>
+		</fileset>                     
+		<fileset dir="${distr-dir}/lib">
 			<include name="**/*.jar"/>
 		</fileset>
 		<pathelement path="${hard-dependencies}"/>
@@ -55,9 +60,8 @@
 		</javac>
 	</target>
 
-	<target name="distr" depends="build,test">
-		<mkdir dir="${distr-dir}"/>
-		<jar destfile="${distr-dir}/${module-name}-${release-version}.jar">
+	<target name="jar" depends="build">
+		<jar destfile="${distr-dir}/lib/${module-name}-${release-version}.jar">
 			<manifest>
 				<attribute name="Module" value="${module-name}"/>
 				<attribute name="Vendor" value="Eyeline Communications"/>
@@ -68,53 +72,17 @@
 		</jar>
 	</target>
 
-	<target name="compile-test" depends="build">
-		<mkdir dir="${build-dir}/test"/>
-		<javac destdir="${build-dir}/test"
-			   optimize="off"
-			   debug="off"
-			   encoding="UTF-8"
-			   nowarn="true"
-			   includeantruntime="false">
-			<compilerarg value="-Xlint:all"/>
-			<src path="${test-src}"/>
-			<classpath refid="classpath"/>
-			<classpath path="${build-dir}/out"/>
-		</javac>
+	<target name="distr" depends="jar">
+		<mkdir dir="${distr-dir}/logs"/>
+		<copy todir="${distr-dir}/lib">
+			<fileset dir="${root.distr-dir}" includes="**/*"/>
+		</copy>
+		<copy todir="${distr-dir}">
+			<fileset dir="${bin-dir}" includes="**/*"/>
+		</copy>
+		<copy todir="${distr-dir}/config">
+			<fileset dir="${root.config-dir}" includes="**/*"/>
+		</copy>
 	</target>
-
-	<target name="test" description="Execute unit tests" depends="compile-test">
-		<mkdir dir="${report-dir}/tmp/test"/>
-		<mkdir dir="${report-dir}/junit"/>
-
-		<junit printsummary="true" failureproperty="junit.failure" fork="true" dir="${basedir}">
-			<classpath>
-				<pathelement location="${build-dir}/test"/>
-				<pathelement location="${build-dir}/out"/>
-			</classpath>
-
-			<classpath refid="classpath"/>
-			<classpath path="${build-dir}/out"/>
-
-			<batchtest todir="${report-dir}/tmp/test">
-				<fileset dir="${test-src}">
-					<include name="**/*Test.java"/>
-					<!-- a '$' in the filename indicates an inner class -->
-					<exclude name="**/*$*"/>
-				</fileset>
-
-				<formatter type="xml"/>
-			</batchtest>
-		</junit>
-
-		<junitreport todir="${report-dir}/tmp">
-			<fileset dir="${report-dir}/tmp/test"/>
-			<report todir="${report-dir}/junit"/>
-		</junitreport>
-
-		<delete dir="${report-dir}/tmp"/>
-		<fail if="junit.failure" message="Unit test(s) failed. See reports!"/>
-	</target>
-
 </project>
 
