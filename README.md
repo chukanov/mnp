@@ -8,8 +8,7 @@
 
 В комплекте есть сервер, для определения оператора и региона через REST API (./web-service).
 
-Telegram бот на основе библиотеки: https://telegram.me/MNProbot
-Telegram бот создан на платформе https://miniapps.run 
+Telegram бот на основе библиотеки: https://telegram.me/MNProbot, бот создан на платформе https://miniapps.run 
 
 ## Требования
 Java 8+
