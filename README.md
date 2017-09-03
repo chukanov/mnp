@@ -4,37 +4,21 @@
 * реестры DEF кодов Россвязи (свежие реестры всегда находятся по адресу: http://www.rossvyaz.ru/docs/articles/Kody_DEF-9kh.csv)
 * вручную задаваемые маски в конфигурации (config/mnos.xml)
 * реестры БДПН номеров от https://zniis.ru/. Порядок доступа к БДПН описан тут: https://zniis.ru/bdpn/pay-system/access-procedure.
-Но на самом деле, если перед вами стоит задача определения только региона абонента, то БДПН тут не требуется, так как портировать номер абоненты могут только внутри своего домашнего региона.
+Если перед вами задача определения только региона абонента, то БДПН не потребуется, так как портировать номер абоненты могут только внутри своего домашнего региона.
 
-В комплекте есть сервер, для определения оператора и региона через REST API
-Пример вызова: http://localhost:8080/mnp?subscriber=79139367911
+В комплекте есть jetty сервер, для определения оператора и региона через REST API (./web-service).
+
+Telegram бот на основе библиотеки: https://telegram.me/MNProbot, бот создан на платформе https://miniapps.pro 
 
 ## Требования
 Java 8+
 
 ## Зависимости
 * log4j-1.2.X
-* junit-4.X для сборки
+* junit-4.X для тестов после сборки
 
 ## Cборка
     ant
-
-## Сервер REST API
-###Зависимости
-* jersey-server-2.7
-* jetty-all-9.3.0.M1
-
-### Сборка
-    ant
-
-### Запуск
-После сборки выполнить:
-    cd distr
-    start.sh
-
-###Остановка:
-    После запуска выполнить:
-    stop.sh
 
 ## Дополнительно
 
@@ -52,7 +36,7 @@ Java 8+
 
         Storage storage = Builder.
                 builder().
-                add(new RossvyazMasksParser(Paths.get("config/rossvyaz/ru.backup.2017-08-09-11-45.csv"))).
+                add(new RossvyazMasksParser(Paths.get("config/rossvyaz/Kody_DEF-9kh.csv"))).
                 add(new CustomMasksParser(Paths.get("config/mnos.xml"))).
                 add(new ZniisMnpParser(Paths.get("config/zniils/"))).
                 idTitle( Paths.get("config/idfilters/titles.xml")).
@@ -61,3 +45,24 @@ Java 8+
         Mno mno = storage.lookup("79139367911"));
         System.out.println(mno);
         
+
+# Сервер REST API
+## Зависимости
+* jersey-server-2.7
+* jetty-all-9.3.0.M1
+
+## Сборка
+    cd web-service
+    ant
+
+## Запуск
+После сборки выполнить:
+
+    cd distr
+    start.sh
+
+## Остановка
+После запуска выполнить:
+
+    cd distr
+    stop.sh
