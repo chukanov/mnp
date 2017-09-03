@@ -1,0 +1,8 @@
+<ivy-module version="2.0">
+  <info organisation="mobi.eyeline.mnp" module="miniapps_bot"/>
+  <dependencies>
+    <dependency org="commons-lang" name="commons-lang" rev="2.3"/>
+    <dependency org="log4j" name="log4j" rev="1.2.16"/>
+    <dependency org="javax.servlet" name="servlet-api" rev="2.5"/>
+  </dependencies>
+</ivy-module>
