@@ -1,16 +1,14 @@
 package com.eyeline.mnp;
 
 import com.eyeline.mnp.mask.Mask;
-import com.eyeline.mnp.mask.MaskMap;
-
-import java.util.*;
+import com.eyeline.mnp.mask.MaskTrieMap;
 
 /**
  * @author Chukanov
  */
 public class MasksStorage implements Storage{
 
-    private MaskMap<Mno> storage = new MaskMap<>();
+    private MaskTrieMap<Mno> storage = new MaskTrieMap<>();
 
     @Override
     public Mno lookup(String phone) {
@@ -31,6 +29,6 @@ public class MasksStorage implements Storage{
 
     @Override
     public void clear() {
-        storage = new MaskMap<>();
+        storage = new MaskTrieMap<>();
     }
 }

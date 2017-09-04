@@ -3,11 +3,12 @@ package com.eyeline.mnp.mask;
 import java.util.*;
 
 /**
- * Class represents Map<Mask,T>-like storage to store any objects by telephone number masks
+ * Class represents Map<Mask,T>-like storage to store any objects by telephone number masks.
+ * Based on prefix tree (https://en.wikipedia.org/wiki/Trie)
  * @param <T> generic class of stored objects
  * @author Chukanov
  */
-public class MaskMap<T> {
+public class MaskTrieMap<T> {
 
     private Node<T> root = new DigitNode<T>();
 

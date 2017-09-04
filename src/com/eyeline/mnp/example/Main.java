@@ -16,9 +16,9 @@ public class Main {
                 builder().
                 add(new RossvyazMasksParser(Paths.get("config/rossvyaz/Kody_DEF-9kh.csv"))).
                 add(new CustomMasksParser(Paths.get("config/mnos.xml"))).
-                add(new ZniisMnpParser(Paths.get("config/zniils/"))).
-                idTitle( Paths.get("config/idfilters/titles.xml")).
-                idRegion(Paths.get("config/idfilters/areas.xml")).
+                //add(new ZniisMnpParser(Paths.get("config/zniils/"))).
+                idTitle( Paths.get("config/filters/titles.xml")).
+                idRegion(Paths.get("config/filters/areas.xml")).
                 build();
         System.out.println(storage.lookup("79139367911"));
         System.out.println(storage.lookup("79000000001"));

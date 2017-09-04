@@ -75,7 +75,8 @@ public class Builder {
     }
 
     private Storage produceMNPStorage() {
-        return new HashMapStorage();
+        //return new HashMapStorage();
+        return new MasksStorage();
     }
 
     public Storage build() throws Exception {
