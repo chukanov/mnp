@@ -52,7 +52,7 @@ Java 8+
 * jetty-all-9.3.0.M1
 
 ## Сборка
-    cd web-service
+    cd services/web-service
     ant
 
 ## Запуск
