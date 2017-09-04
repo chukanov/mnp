@@ -12,6 +12,7 @@
             String x = toMsisdn(in);
             if (x!=null) {
                 result.add(x);
+                if (result.size()>2) break;
             }
         }
         return new ArrayList<String>(result);
