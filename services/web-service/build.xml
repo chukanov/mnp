@@ -10,9 +10,9 @@
 	<property name="doc-dir" location="${basedir}/doc"/>
 	<property name="test-src" location="${basedir}/test"/>
 	<property name="report-dir" location="${build-dir}/report"/>
-        <property name="root.distr-dir" location="${basedir}/../distr"/>
+        <property name="root.distr-dir" location="${basedir}/../../distr"/>
 	<property name="bin-dir" location="${basedir}/bin"/>
-        <property name="root.config-dir" location="${basedir}/../config"/>
+        <property name="root.config-dir" location="${basedir}/../../config"/>
 
 	<tstamp>
 		<format property="build-date" pattern="yyyy-MM-dd HH:mm:ss" />
