@@ -6,9 +6,9 @@
 * реестры БДПН номеров от https://zniis.ru/. Порядок доступа к БДПН описан тут: https://zniis.ru/bdpn/pay-system/access-procedure.
 Если перед вами задача определения только региона абонента, то БДПН не потребуется, так как портировать номер абоненты могут только внутри своего домашнего региона.
 
-В комплекте есть jetty сервер, для определения оператора и региона через REST API (./services/web-service).
+В комплекте есть jetty сервер, для определения оператора и региона через REST API (services/web-service).
 
-Telegram бот на основе библиотеки: https://telegram.me/MNProbot, бот создан на платформе https://miniapps.pro 
+Telegram бот на основе библиотеки: https://telegram.me/MNProbot, бот создан на платформе https://miniapps.pro. Исходник бота лежит в services/miniapps-bot.
 
 ## Требования
 Java 8+
