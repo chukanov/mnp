@@ -2,6 +2,8 @@
 Попробовать работу библиотеки можно в Telegram ботe: https://telegram.me/MNProbot. 
 Исходники бота лежат в services/miniapps-bot.
 
+Описание используемых структур и алгоритмов: https://habrahabr.ru/post/337338
+
 Поддерживаются
 * реестры DEF кодов Россвязи (свежие реестры всегда находятся по адресу: http://www.rossvyaz.ru/docs/articles/Kody_DEF-9kh.csv)
 * вручную задаваемые маски в конфигурации (config/mnos.xml)
