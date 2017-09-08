@@ -2,6 +2,7 @@ package com.eyeline.mnp.example;
 
 import com.eyeline.mnp.Builder;
 import com.eyeline.mnp.Storage;
+import com.eyeline.mnp.mask.MasksUtils;
 import com.eyeline.mnp.parser.CustomMasksParser;
 import com.eyeline.mnp.parser.RossvyazMasksParser;
 import com.eyeline.mnp.parser.ZniisMnpParser;

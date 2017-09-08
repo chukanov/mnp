@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
+
 /**
  * Bulder to help create and configurate storage
  * @author Chukanov
@@ -42,6 +44,9 @@ public class Builder {
     private HashMap<String, Mno> mnoCache = new HashMap<>();
 
     private UpdatePolicy updatePolicy = UpdatePolicy.BUILD_AND_REPLACE;
+
+    private Supplier<Storage> mnpStorageSupplier = MasksStorage::new;
+    private Supplier<Storage> masksStorageSupplier = MasksStorage::new;
 
     private Builder() {
     }
@@ -74,17 +79,36 @@ public class Builder {
         return this;
     }
 
-    private Storage produceMNPStorage() {
-        //return new HashMapStorage();
-        return new MasksStorage();
+    /**
+     * Change storage class for MNP
+     * default it's MasksStorage
+     * @see MasksStorage
+     * @param supplier - new supplier
+     * @return this builder
+     */
+    public Builder withMnpStorageSupplier(Supplier<Storage> supplier) {
+        this.mnpStorageSupplier = supplier;
+        return this;
+    }
+
+    /**
+     * Change storage class for Masks
+     * default it's MasksStorage
+     * @see MasksStorage
+     * @param supplier - new supplier
+     * @return this builder
+     */
+    public Builder withMasksStorageSupplier(Supplier<Storage> supplier) {
+        this.masksStorageSupplier = supplier;
+        return this;
     }
 
     public Storage build() throws Exception {
         if (storage!=null) {
             return storage;
         }
-        masksStorage = new ConcurrentStorage(new MasksStorage());
-        mnpStorage = new ConcurrentStorage(produceMNPStorage());
+        masksStorage = new ConcurrentStorage(masksStorageSupplier.get());
+        mnpStorage = new ConcurrentStorage(mnpStorageSupplier.get());
         storage = new ChainStorage(mnpStorage, masksStorage);
         this.processMasks(masksStorage);
         this.processMnpAllPorted(mnpStorage);
@@ -102,7 +126,7 @@ public class Builder {
                                     processMasks(masksStorage);
                                     break;
                                 case BUILD_AND_REPLACE:
-                                    Storage storage = new MasksStorage();
+                                    Storage storage = masksStorageSupplier.get();
                                     processMasks(storage);
                                     this.masksStorage.setRealStorage(storage);
                             }
@@ -123,7 +147,7 @@ public class Builder {
                                         processMnpReturned(mnpStorage);
                                         break;
                                     case BUILD_AND_REPLACE:
-                                        Storage storage = produceMNPStorage();
+                                        Storage storage = mnpStorageSupplier.get();
                                         processMnpAllPorted(storage);
                                         processMnpLastPorted(storage);
                                         processMnpReturned(storage);
