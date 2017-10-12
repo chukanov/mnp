@@ -7,15 +7,17 @@ import java.util.Arrays;
  * Represents telephone number mask
  * where '?' is a wildcard symbol.
  * Maximum length of mask is 15 symbols
+ *
+ * It is immutable class
  * @author Chukanov
  */
-public class Mask {
+public final class Mask {
     public static final int MAX_LENGTH = 15;
     private static final String EMPTY_MASK = "";
     public static final char WILDCARD = '?';
     private static final char ZERO = '0';
 
-    private byte[] data;
+    private final byte[] data;
 
     public Mask(String mask) {
         this.data = mask.getBytes(Charset.forName("ASCII"));
