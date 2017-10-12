@@ -4,8 +4,11 @@ import com.eyeline.utils.BlankRunnable;
 import com.eyeline.utils.DirectoryWatchDog;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.*;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
+
 /**
  * @author Chukanov
  */
@@ -17,6 +20,7 @@ public class ZniisMnpParser extends DirectoryWatchDog implements MnpParser, MnpP
     private String countryCode = "7";
     private char delimeter = ',';
     private int skipLines = 1;
+    private Charset charset = Charset.forName("WINDOWS-1251");
 
     private Path dir;
 
@@ -25,7 +29,8 @@ public class ZniisMnpParser extends DirectoryWatchDog implements MnpParser, MnpP
     }
 
     protected void parse(Path file, Consumer<MnpParser.Number> consumer) throws IOException {
-        Files.lines(file).
+        try(Stream<String> linesStream = Files.lines(file, charset)) {
+            linesStream.
                 skip(skipLines).
                 forEach(line -> {
                     String[] data = line.split(Character.toString(delimeter));
@@ -39,6 +44,7 @@ public class ZniisMnpParser extends DirectoryWatchDog implements MnpParser, MnpP
                         t.printStackTrace();
                     }
                 });
+        }
     }
 
     @Override

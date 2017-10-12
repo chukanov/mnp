@@ -11,6 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
+
 /**
  * @author Chukanov
  */
@@ -41,7 +43,8 @@ public class RossvyazMasksParser extends DirectoryWatchDog implements MasksParse
 
     @Override
     public void parse(Consumer<MnoInfo> consumer) throws Exception {
-        Files.lines(rossvyazFile, charset).
+        try(Stream<String> linesStream = Files.lines(rossvyazFile, charset)) {
+            linesStream.
                 skip(skipLines).
                 forEach(line -> {
                     String[] data = line.split(Character.toString(delimeter));
@@ -56,6 +59,7 @@ public class RossvyazMasksParser extends DirectoryWatchDog implements MasksParse
                     MnoInfo mno = new MnoInfo(mnoName, mnoRegion, country, masks);
                     consumer.accept(mno);
                 });
+        }
     }
 
     @Override
