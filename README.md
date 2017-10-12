@@ -34,6 +34,7 @@ When creating a repository, you can specify a policy for changing the repository
 * CLEAR_AND_BUILD: When changing files, the storage is locked, cleaned and refilled.
 
 Example of creating a repository:
+
         Storage storage = Builder.
                 builder().
                 add(new RossvyazMasksParser(Paths.get("config/rossvyaz/Kody_DEF-9kh.csv"))).
@@ -42,7 +43,7 @@ Example of creating a repository:
                 idTitle( Paths.get("config/idfilters/titles.xml")).
                 idRegion(Paths.get("config/idfilters/areas.xml")).
                 build();
-        Mno mno = storage.lookup("79139367911"));
+        Mno mno = storage.lookup("79139367911");
         System.out.println(mno);
         
 
