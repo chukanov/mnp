@@ -5,6 +5,7 @@ import com.eyeline.mnp.Mno;
 import com.eyeline.mnp.Storage;
 import com.eyeline.mnp.parser.CustomMasksParser;
 import com.eyeline.mnp.parser.RossvyazMasksParser;
+import com.eyeline.mnp.parser.ZniisMnpParser;
 
 import java.nio.file.Paths;
 
@@ -15,7 +16,7 @@ public class Main {
                 builder().
                 add(new RossvyazMasksParser(Paths.get("config/rossvyaz/Kody_DEF-9kh.csv"))).
                 add(new CustomMasksParser(Paths.get("config/mnos.xml"))).
-                //add(new ZniisMnpParser(Paths.get("config/zniis/"))).
+//                add(new ZniisMnpParser(Paths.get("config/zniis/"))).
                 idTitle( Paths.get("config/filters/titles.xml")).
                 idRegion(Paths.get("config/filters/areas.xml")).
                 build();

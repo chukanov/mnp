@@ -8,13 +8,10 @@ import com.eyeline.utils.filter.Filter;
 import com.eyeline.utils.filter.PatternFilter;
 import org.apache.log4j.Logger;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Properties;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 

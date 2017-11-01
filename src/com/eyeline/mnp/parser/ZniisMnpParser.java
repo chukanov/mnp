@@ -20,7 +20,7 @@ public class ZniisMnpParser extends DirectoryWatchDog implements MnpParser, MnpP
     private String countryCode = "7";
     private char delimeter = ',';
     private int skipLines = 1;
-    private Charset charset = Charset.forName("WINDOWS-1251");
+    private Charset charset = Charset.forName("UTF-8");
 
     private Path dir;
 
